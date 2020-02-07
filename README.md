@@ -8,11 +8,11 @@ from mypyconsole import MyPyConsole
 console = MyPyConsole()
 
 def Config():
-	console = MyPyConsole()
+	console.name = "my-console-name"
 	console.AddItem("aaa", func1, "some function") # "aaa" - cmd; func1 - function; "some function" - description
 #end define
 
-def func1():
+def func1(args):
 	print("qwerty")
 #end define
 
@@ -24,4 +24,5 @@ def func1():
 if __name__ == "__main__":
 	Config()
 	console.Run()
+#end if
 ```
