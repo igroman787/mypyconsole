@@ -8,7 +8,7 @@ from mypyconsole import MyPyConsole
 console = MyPyConsole()
 
 def Config():
-	console.name = "my-console-name"
+  console.name = "my-console-name"
 	console.AddItem("aaa", func1, "some function") # "aaa" - cmd; func1 - function; "some function" - description
 #end define
 
