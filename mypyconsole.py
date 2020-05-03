@@ -49,10 +49,10 @@ class MyPyConsole():
 		args = resultList[1:]
 		for item in self.menuItems:
 			if cmd == item.cmd:
-				#try:
-				item.func(args)
-				#except Exception as err:
-				#	print("{RED}Error: {err}{ENDC}".format(RED=self.RED, ENDC=self.ENDC, err=err))
+				try:
+					item.func(args)
+				except Exception as err:
+					print("{RED}Error: {err}{ENDC}".format(RED=self.RED, ENDC=self.ENDC, err=err))
 				print()
 				return
 		print(self.unknownCmd)
