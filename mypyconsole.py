@@ -13,9 +13,9 @@ class MyPyConsoleItem():
 #end class
 
 class MyPyConsole():
-	self.RED = '\033[31m'
-	self.GREEN = '\033[92m'
-	self.ENDC = '\033[0m'
+	RED = '\033[31m'
+	GREEN = '\033[92m'
+	ENDC = '\033[0m'
 
 	def __init__(self):
 		self.name = "console"
