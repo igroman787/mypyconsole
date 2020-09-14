@@ -13,12 +13,13 @@ class MyPyConsoleItem():
 #end class
 
 class MyPyConsole():
-	RED = '\033[31m'
-	GREEN = '\033[92m'
-	ENDC = '\033[0m'
-	
+	self.RED = '\033[31m'
+	self.GREEN = '\033[92m'
+	self.ENDC = '\033[0m'
+
 	def __init__(self):
-		self.name = ""
+		self.name = "console"
+		self.color = self.GREEN
 		self.unknownCmd = "Unknown command"
 		self.helloText = "Welcome to the console. Enter 'help' to display the help menu."
 		self.menuItems = list()
@@ -34,7 +35,7 @@ class MyPyConsole():
 
 	def UserWorker(self):
 		try:
-			result = input(self.GREEN + self.name + "> " + self.ENDC)
+			result = input(self.color + self.name + "> " + self.ENDC)
 		except KeyboardInterrupt:
 			self.Exit()
 		except EOFError:
