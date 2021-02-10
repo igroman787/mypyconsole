@@ -22,6 +22,7 @@ class MyPyConsole():
 		self.color = self.GREEN
 		self.unknownCmd = "Unknown command"
 		self.helloText = "Welcome to the console. Enter 'help' to display the help menu."
+		self.startFunction = None
 		self.menuItems = list()
 		self.AddItem("help", self.Help, "Print help text")
 		self.AddItem("clear", self.Clear, "Clear console")
@@ -81,6 +82,8 @@ class MyPyConsole():
 
 	def Run(self):
 		print(self.helloText)
+		if self.startFunction:
+			self.startFunction()
 		while True:
 			self.GetCmdFromUser()
 	#end define
