@@ -3,6 +3,7 @@
 
 import os
 import sys
+import readline
 
 class MyPyConsoleItem():
 	def __init__(self, cmd, func, desc):
@@ -27,6 +28,15 @@ class MyPyConsole():
 		self.AddItem("help", self.Help, "Print help text")
 		self.AddItem("clear", self.Clear, "Clear console")
 		self.AddItem("exit", self.Exit, "Exit from application")
+		readline.parse_and_bind("tab: complete")
+		readline.set_completer(self.ReadlineCompleter)
+	#end define
+
+	def ReadlineCompleter(self, text, state):
+		commands = [item.cmd for item in self.menuItems if item.cmd.startswith(text)]
+		if state < len(commands):
+			return commands[state]
+		return None
 	#end define
 
 	def AddItem(self, cmd, func, desc):
