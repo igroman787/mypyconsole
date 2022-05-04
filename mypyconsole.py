@@ -57,6 +57,7 @@ class MyPyConsole():
 	def GetCmdFromUser(self):
 		result = self.UserWorker()
 		resultList = result.split(' ')
+		resultList = list(filter(None, resultList))
 		cmd = resultList[0]
 		args = resultList[1:]
 		for item in self.menuItems:
