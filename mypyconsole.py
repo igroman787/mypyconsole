@@ -58,7 +58,7 @@ class MyPyConsole():
 		result = self.UserWorker()
 		resultList = result.split(' ')
 		resultList = list(filter(None, resultList))
-		cmd = resultList[0]
+		cmd = self.GetItemFromList(resultList, 0)
 		args = resultList[1:]
 		for item in self.menuItems:
 			if cmd == item.cmd:
@@ -97,5 +97,11 @@ class MyPyConsole():
 			self.startFunction()
 		while True:
 			self.GetCmdFromUser()
+	#end define
+
+	def GetItemFromList(self, data, index):
+		try:
+			return data[index]
+		except: pass
 	#end define
 #end class
