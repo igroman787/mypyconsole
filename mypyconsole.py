@@ -99,9 +99,9 @@ class MyPyConsole():
 			print(cmd, item.desc)
 	#end define
 
-	def print_history(self):
+	def print_history(self, args=None):
 		for i, cmd in enumerate(self.history):
-			print(f'{i}  {cmd}')
+			print(f'{i + 1}  {cmd}')
 	# end define
 
 	def clear(self, args=None):
