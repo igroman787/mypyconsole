@@ -133,6 +133,8 @@ class MyPyConsole():
 		try:
 			if self.local is not None:
 				self.history.extend(self.local.db.get("console_history", []))  # now self.history = deque(db["console_history"])
+				for item in self.history:
+					readline.add_history(item)
 		except: pass
 		while True:
 			self.get_cmd_from_user()
