@@ -4,6 +4,7 @@
 import os
 import sys
 import readline
+from collections import deque
 
 class MyPyConsoleItem():
 	def __init__(self, cmd, func, desc):
@@ -27,8 +28,11 @@ class MyPyConsole():
 		self.startFunction = None
 		self.start_function = None
 		self.menu_items = list()
+		self.history = deque(maxlen=100)
+		self.local = None
 		self.add_item("help", self.help, "Print help text")
 		self.add_item("clear", self.clear, "Clear console")
+		self.add_item("history", self.print_history, "Print last commands")
 		self.add_item("exit", self.exit, "Exit from application")
 		readline.parse_and_bind("tab: complete")
 		readline.set_completer(self.readline_completer)
@@ -50,6 +54,13 @@ class MyPyConsole():
 		self.menu_items.append(item)
 	#end define
 
+	def add_history_item(self, item: str):
+		try:
+			self.history.append(item)
+			self.local.db["console_history"] = list(self.history)
+			self.local.save()
+		except: pass
+
 	def user_worker(self):
 		try:
 			result = input(self.color + self.name + "> " + self.ENDC)
@@ -62,6 +73,7 @@ class MyPyConsole():
 
 	def get_cmd_from_user(self):
 		result = self.user_worker()
+		self.add_history_item(result)
 		result_list = result.split(' ')
 		result_list = list(filter(None, result_list))
 		cmd = self.get_item_from_list(result_list, 0)
@@ -95,6 +107,11 @@ class MyPyConsole():
 			print(cmd, item.desc)
 	#end define
 
+	def print_history(self, args=None):
+		for i, cmd in enumerate(self.history):
+			print(f'{i + 1}  {cmd}')
+	# end define
+
 	def clear(self, args=None):
 		os.system("clear")
 	#end define
@@ -113,6 +130,12 @@ class MyPyConsole():
 		print(self.hello_text)
 		if self.start_function:
 			self.start_function()
+		try:
+			if self.local is not None:
+				self.history.extend(self.local.db.get("console_history", []))  # now self.history = deque(db["console_history"])
+				for item in self.history:
+					readline.add_history(item)
+		except: pass
 		while True:
 			self.get_cmd_from_user()
 	#end define
