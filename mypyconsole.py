@@ -7,10 +7,11 @@ import readline
 from collections import deque
 
 class MyPyConsoleItem():
-	def __init__(self, cmd, func, desc):
+	def __init__(self, cmd: str, func, desc: str, usage: str = ''):
 		self.cmd = cmd
 		self.func = func
 		self.desc = desc
+		self.usage = usage
 	#end define
 #end class
 
@@ -49,8 +50,8 @@ class MyPyConsole():
 		self.add_item(cmd, func, desc)
 	#end define
 
-	def add_item(self, cmd, func, desc):
-		item = MyPyConsoleItem(cmd, func, desc)
+	def add_item(self, cmd, func, desc, usage: str = ''):
+		item = MyPyConsoleItem(cmd, func, desc, usage)
 		self.menu_items.append(item)
 	#end define
 
@@ -99,12 +100,12 @@ class MyPyConsole():
 	def help(self, args=None):
 		indexList = list()
 		for item in self.menu_items:
-			index = len(item.cmd)
+			index = len(item.cmd) + len(item.usage) + 1
 			indexList.append(index)
 		index = max(indexList) + 1
 		for item in self.menu_items:
-			cmd = item.cmd.ljust(index)
-			print(cmd, item.desc)
+			cmd_text = (item.cmd + ' ' + item.usage).ljust(index)
+			print(cmd_text, item.desc)
 	#end define
 
 	def print_history(self, args=None):
